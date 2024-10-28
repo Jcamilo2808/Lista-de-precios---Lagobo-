@@ -579,55 +579,8 @@ if st.session_state.clave_correcta:
             df_agrupado['Saldo final (cant.)'] = pd.to_numeric(df_agrupado['Saldo final (cant.)'], errors='coerce')
             # Reemplazar posibles valores NaN por 0
             df_agrupado['Saldo final (cant.)'] = df_agrupado['Saldo final (cant.)'].fillna(0)
-
-            # Crear gráfico de barras horizontal con Plotly
-            fig = px.bar(
-                df_agrupado,
-                y='CIUDAD',  # Eje Y: Ciudades (para barras horizontales)
-                x='Saldo final (cant.)',  # Eje X: Unidades
-                text='Saldo final (cant.)',  # Añadir texto dentro de las barras
-                orientation='h'  # Configuración para barras horizontales
-            )
-
-            # Personalizar el gráfico para mejorar el diseño
-            fig.update_traces(
-                textposition='inside',  # Posición del texto dentro de las barras
-                marker=dict(
-                    color='#01bcf3',  # Color de las barras
-                ),
-                width=0.8,  # Ancho relativo de las barras (reduce para parecer redondeadas)
-                textfont=dict(
-                size=14,  # Tamaño del texto (puedes ajustar a tus necesidades)
-                color='white',  # Color del texto
-                family='Arial',  # Fuente del texto, puedes cambiarla si prefieres otra
-                weight='bold'  # Hacer el texto en negrita
-                )
-            )
-
-            fig.update_layout(
-            xaxis_title= "UNIDADES DISPONIBLES",  # Eliminar el título del eje X
-            yaxis_title=None,  # Eliminar el título del eje Y
-            title="DISPONIBILIDAD DEL PRODUCTO POR CIUDAD",  # Título
-            plot_bgcolor='white',  # Fondo blanco para el gráfico
-            yaxis=dict(
-                categoryorder='total ascending',  # Ordenar las ciudades de mayor a menor
-                tickfont=dict(
-                    size=14,  # Tamaño del texto de las ciudades
-                    color='Gray',  # Color del texto
-                ),
-                tickangle=0,  # Mantener el texto horizontal
-                automargin=True  # Ajustar márgenes automáticamente para el texto grande
-            ),
-            title_font=dict(
-                size=20,
-                color='black',
-                family='Arial',
-            ),
-            title_x=0.2,  # Centrar el título
-        )
-
-            # Mostrar el gráfico en Streamlit
-            st.plotly_chart(fig)
+            
+            st.dataframe(df_agrupado)
 
     # Mostrar los datos según la zona seleccionada
     if st.session_state.zona_seleccionada == "Zona 1":
