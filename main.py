@@ -403,7 +403,7 @@ st.markdown(
 )
 
 # Mostrar el logo en la parte superior de la barra lateral
-st.sidebar.image(r"D:\DATOS JUAN\Downloads\channels4_profile (1).jpg", use_column_width=True)
+st.sidebar.image(r"channels4_profile (1).jpg", use_column_width=True)
 
 # Inicializar la variable de sesión para la clave correcta
 if 'clave_correcta' not in st.session_state:
