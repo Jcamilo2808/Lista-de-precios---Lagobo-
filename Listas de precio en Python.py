@@ -9,7 +9,7 @@ import plotly.graph_objects as go
 
 
 # Ruta del archivo Excel
-file_path = r"D:\DATOS JUAN\Documents\Listas de precios\Copia de lista promo del 18-31 Julio (00000002).xlsx"
+file_path = r"Copia de lista promo del 18-31 Julio (00000002).xlsx"
 
 # Definir la ruta del archivo Excel
 ruta_archivo_excel = r'Z:\INVENTARIOS\Decadal y ordenes de compra\Inventarios.xlsx'
