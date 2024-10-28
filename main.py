@@ -283,8 +283,8 @@ if st.session_state.clave_correcta:
                     # Mostrando referencia y descripción en la misma línea con letras negras
                     st.markdown(
                         f'<div class="product-details-inline">'
-                        f'<span>Descripción del item 🡺 {row["Desc. item"]}</span>'
-                        f'<span>Código del item 🡺 {row["Referencia"]}</span>'
+                        f'<span>Descripción del item - {row["Desc. item"]}</span>'
+                        f'<span>Código del item - {row["Referencia"]}</span>'
                         f'</div>', unsafe_allow_html=True
                     )
 
@@ -362,12 +362,35 @@ if st.session_state.clave_correcta:
 
             # Agrupar por ciudad y sumar las unidades disponibles
             df_agrupado = df_filtrado_inventarios.groupby('CIUDAD', as_index=False)['Saldo final (cant.)'].sum()
-            # Convertir 'Saldo final (cant.)' a numérico si es necesario
-            df_agrupado['Saldo final (cant.)'] = pd.to_numeric(df_agrupado['Saldo final (cant.)'], errors='coerce')
-            # Reemplazar posibles valores NaN por 0
-            df_agrupado['Saldo final (cant.)'] = df_agrupado['Saldo final (cant.)'].fillna(0)
             
-            st.dataframe(df_agrupado)
+            # Crear el gráfico de barras horizontal
+            fig, ax = plt.subplots(figsize=(8, 6))
+            bars = ax.barh(df_agrupado['CIUDAD'], df_agrupado['Saldo final (cant.)'], color='#01bcf3')
+
+            # Agregar etiquetas dentro de las barras
+            for bar in bars:
+                ax.text(
+                    bar.get_width(),  # Ajuste para posicionar el texto dentro de la barra
+                    bar.get_y() + bar.get_height() / 2,
+                    f'{int(bar.get_width())}',
+                    va='center',
+                    ha='right',  # Alinear el texto a la derecha
+                    color='white',
+                    fontsize=12,
+                    fontweight='bold'
+                )
+
+            # Crear el gráfico de barras horizontal con un margen ajustado
+            fig.subplots_adjust(left=-0.1)  # Ajuste de margen izquierdo (0.3 es el margen extra a la izquierda)
+                
+            # Configurar título y eliminar ejes
+            ax.set_title("DISPONIBILIDAD DE PRODUCTO POR CIUDAD", fontsize=14, fontweight='bold', color='black')
+            ax.set_xlabel("UNIDADES")  # Eje X 
+            ax.set_ylabel("")  # Eje Y vacío
+            ax.tick_params(axis='x', colors='white')  # Ocultar las etiquetas del eje X
+
+            # Mostrar el gráfico en Streamlit
+            st.pyplot(fig)
 
     # Mostrar los datos según la zona seleccionada
     if st.session_state.zona_seleccionada == "Zona 1":
