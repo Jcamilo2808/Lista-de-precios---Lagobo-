@@ -414,13 +414,12 @@ st.sidebar.image(r"D:\DATOS JUAN\Downloads\channels4_profile (1).jpg", use_colum
 if 'clave_correcta' not in st.session_state:
     st.session_state.clave_correcta = False
 
-# Función para cargar y procesar los datos
 def cargar_datos():
-    ruta_base = r"D:\DATOS JUAN\Desktop\LISTAS DE PRECIO"
-    df_zona1 = pd.read_excel(f"{ruta_base}\\df_zona1.xlsx")
-    df_zona2 = pd.read_excel(f"{ruta_base}\\df_zona2.xlsx")
-    df_zona3 = pd.read_excel(f"{ruta_base}\\df_zona3.xlsx")
-    df_zona4 = pd.read_excel(f"{ruta_base}\\df_zona4.xlsx")
+    # Leer cada archivo de zona directamente desde el repositorio
+    df_zona1 = pd.read_excel('df_zona1.xlsx')
+    df_zona2 = pd.read_excel('df_zona2.xlsx')
+    df_zona3 = pd.read_excel('df_zona3.xlsx')
+    df_zona4 = pd.read_excel('df_zona4.xlsx')
     return df_zona1, df_zona2, df_zona3, df_zona4
 
 # Cargar los datos
