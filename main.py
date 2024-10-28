@@ -1,10 +1,7 @@
 import pandas as pd
-import folium
 import streamlit as st
-from streamlit_folium import st_folium
 import plotly.express as px
 import matplotlib.pyplot as plt
-import altair as alt
 import plotly.graph_objects as go
 
 
